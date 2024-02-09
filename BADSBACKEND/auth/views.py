@@ -50,6 +50,7 @@ class AllergySearchViewSet(viewsets.ModelViewSet):
         # check if user exists
         if get_patient(eth_address) != None:
             # update user
+            print(get_patient(eth_address))
             update_patient(eth_address, full_name, family_history,
                            genotype, blood_group, allergy, medical_history)
             return Response("User updated", status=status.HTTP_200_OK)

@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173', 'http://bads.vercel.app', 'https://bads.vercel.app'
+    'http://localhost:5173', 'http://bads-xi.vercel.app', 'https://bads-xi.vercel.app'
 ]
 # Application definition
 REST_FRAMEWORK = {
