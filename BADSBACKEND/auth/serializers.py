@@ -22,7 +22,7 @@ class AllergyUsersSerializer(serializers.HyperlinkedModelSerializer):
                   'genotype', 'blood_group', 'allergy', 'medical_history']
 
 
-class Allerguserializer(serializers.OrderedDict):
+class Allerguserializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AllergyUsers
         fields = ['name', 'eth_address', 'family_history',
