@@ -11,8 +11,8 @@ alchemy_url = "https://gateway.tenderly.co/public/polygon-mumbai"
 w3 = Web3(Web3.HTTPProvider(alchemy_url))
 private_key = "45f26a1e5a2d50bd7c905c0446386acf9ca77da632cca16d52e1922da3ec1aa0"
 # Print if web3 is successfully connected
-abi = """
-  [
+abi="""
+[
     {
       "inputs": [],
       "stateMutability": "nonpayable",
@@ -28,7 +28,6 @@ abi = """
         {
           "internalType": "string",
           "name": "name",
-          +-
           "type": "string"
         },
         {
@@ -227,13 +226,12 @@ abi = """
       "type": "function"
     }
   ]
-  """
+"""
 print(w3.is_connected())
 acct = w3.eth.account.from_key(private_key)
 w3.eth.default_account = acct.address
 address = "0x9e37C395db81F58a9D0B5e21892bd422207CA614"
 # 0xFE970F2a317C7bFD5887292B196661A7325b9F2d
-# 0x722a62D34E46460CB1DaFdc58AdCA70474af578C
 w3.middleware_onion.add(
     construct_sign_and_send_raw_middleware(acct))
 w3.middleware_onion.inject(geth_poa_middleware, layer=0)
