@@ -28,6 +28,7 @@ abi = """
         {
           "internalType": "string",
           "name": "name",
+          +-
           "type": "string"
         },
         {
