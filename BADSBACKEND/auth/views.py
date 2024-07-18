@@ -56,7 +56,7 @@ class AllergySearchViewSet(viewsets.ModelViewSet):
             return Response("User updated", status=status.HTTP_200_OK)
         else:
             # create user
-            add_patient(eth_address, full_name, family_history,
+            update_patient(eth_address, full_name, family_history,
                         genotype, blood_group, allergy, medical_history)
             return Response("User created", status=status.HTTP_201_CREATED)
 

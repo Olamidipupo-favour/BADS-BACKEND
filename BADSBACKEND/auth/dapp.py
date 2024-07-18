@@ -181,7 +181,7 @@ abi="""
 print(w3.is_connected())
 acct = w3.eth.account.from_key(private_key)
 w3.eth.default_account = acct.address
-address = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+address = "0x16e66E668268A9a94928115C63aA63d8958b33D0"
 # 0xFE970F2a317C7bFD5887292B196661A7325b9F2d
 w3.middleware_onion.add(
     construct_sign_and_send_raw_middleware(acct))
@@ -215,21 +215,12 @@ def get_patient(patient_address):
 
 
 def update_patient(patient_adress, name, family_history, genotype, blood_group, allergy, medical_history):
-    txn = contract.functions.updatePatient(
-        patient_adress, name, family_history, genotype, blood_group, allergy, medical_history
-    ).buildTransaction({
-        'chainId': 80001,  # Replace with the correct chain ID
-        'gas': 2000000,  # Set the appropriate gas limit
-        'gasPrice': w3.toWei('50', 'gwei'),  # Set the appropriate gas price
-        'nonce': w3.eth.getTransactionCount(acct.address),  # Get the nonce
-    })
-
-    signed_txn = acct.sign_transaction(txn)
-    txn_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
-
-    # Wait for the transaction to be mined
-    txn_receipt = w3.eth.wait_for_transaction_receipt(txn_hash)
-    #return txn_receipt
+    transaction = contract.functions.updatePatient(
+        patient_adress, name, family_history, genotype, blood_group, allergy, medical_history).transact()
+    import time
+    # time.sleep(30)
+    transaction_receipt = w3.eth.wait_for_transaction_receipt(transaction)
+    return transaction_receipt
 
 
 def delete_patient(patient_adress):
