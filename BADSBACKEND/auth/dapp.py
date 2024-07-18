@@ -12,12 +12,7 @@ w3 = Web3(Web3.HTTPProvider(alchemy_url))
 private_key = "134441586d8cf93691e5444cafadaa4628927ae28f4cddd891d661a110ff5a55"
 # Print if web3 is successfully connected
 abi="""
- [
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
+[
     {
       "anonymous": false,
       "inputs": [
@@ -36,49 +31,6 @@ abi="""
       ],
       "name": "PatientAdded",
       "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "patientAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "name",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "familyHistory",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "genotype",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "bloodGroup",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "allergy",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "medicalHistory",
-          "type": "string"
-        }
-      ],
-      "name": "addPatient",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
     },
     {
       "inputs": [
@@ -132,19 +84,6 @@ abi="""
           "internalType": "string",
           "name": "medicalHistory",
           "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "owner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
         }
       ],
       "stateMutability": "view",
@@ -238,7 +177,7 @@ abi="""
       "type": "function"
     }
   ]
-"""
+  """
 print(w3.is_connected())
 acct = w3.eth.account.from_key(private_key)
 w3.eth.default_account = acct.address
