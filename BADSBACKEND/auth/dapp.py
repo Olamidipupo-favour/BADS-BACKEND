@@ -218,9 +218,9 @@ def update_patient(patient_adress, name, family_history, genotype, blood_group, 
     transaction = contract.functions.updatePatient(
         patient_adress, name, family_history, genotype, blood_group, allergy, medical_history).transact()
     import time
-    # time.sleep(30)
-    transaction_receipt = w3.eth.wait_for_transaction_receipt(transaction)
-    return transaction_receipt
+    #time.sleep(30)
+    #transaction_receipt = w3.eth.wait_for_transaction_receipt(transaction)
+    #return transaction_receipt
 
 
 def delete_patient(patient_adress):
