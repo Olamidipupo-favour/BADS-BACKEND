@@ -62,6 +62,7 @@ class AllergySearchViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         eth_address = request.query_params.get('eth_address')
+        print(eth_address)
         data = None
         try:
             data = get_patient(eth_address)

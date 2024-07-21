@@ -189,6 +189,7 @@ w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 contract = w3.eth.contract(address=address, abi=abi)
 d = contract.all_functions()
 print(d)
+
 # print a list of the accounts present in alchemy
 print(w3.eth.accounts)
 # exit(0)
@@ -215,19 +216,33 @@ def get_patient(patient_address):
 
 
 def update_patient(patient_adress, name, family_history, genotype, blood_group, allergy, medical_history):
-    transaction = contract.functions.updatePatient(
-        patient_adress, name, family_history, genotype, blood_group, allergy, medical_history).transact()
-    import time
+    #transaction = contract.functions.updatePatient(
+        #patient_adress, name, family_history, genotype, blood_group, allergy, medical_history).transact()
+    unsent_patient_tx = contract.functions.updatePatient(
+        patient_adress, name, family_history, genotype, blood_group, allergy, medical_history).build_transaction({
+    "from": acct.address,
+    "nonce": w3.eth.get_transaction_count(acct.address),
+})
+    signed_tx = w3.eth.account.sign_transaction(unsent_patient_tx, private_key=private_key)
+    tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+    w3.eth.wait_for_transaction_receipt(tx_hash)
+    #import time
     #time.sleep(30)
     #transaction_receipt = w3.eth.wait_for_transaction_receipt(transaction)
     #return transaction_receipt
 
 
 def delete_patient(patient_adress):
-    txn_hash = contract.functions.deletePatient(patient_adress).transact()
-
+    #txn_hash = contract.functions.deletePatient(patient_adress).transact()
+    unsent_patient_tx = contract.functions.deletePatient(
+        patient_adress).build_transaction({
+    "from": acct.address,
+    "nonce": w3.eth.get_transaction_count(acct.address),
+})
+    signed_tx = w3.eth.account.sign_transaction(unsent_patient_tx, private_key=private_key)
+    tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+    w3.eth.wait_for_transaction_receipt(tx_hash)
     # Wait for the transaction to be mined
-    w3.eth.wait_for_transaction_receipt(txn_hash)
 
 
 # Example usage

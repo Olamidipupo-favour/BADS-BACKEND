@@ -137,5 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JWT_AUTH = {
     # how long the original token is valid for
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=30),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=90),
 }
+
+#make jwt expire after a verrty long time
